@@ -1,0 +1,65 @@
+#[build-system]
+#requires = ["hatchling"]
+#build-backend = "hatchling.build"
+[project]
+name = "dicey"
+version = "0.0.1"
+authors = [
+    { name="Terrence Curran", email="tea@grilledcheese.com" },
+]
+description = "Dicey"
+readme = "README.md"
+requires-python = ">=3.8"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+dependencies = [
+    "alembic",
+    "astroid",
+    "autopep8",
+    "click",
+    "dominate",
+    "eventlet",
+    "flake8",
+    "Flask",
+    "Flask-Bootstrap",
+    "Flask-Migrate",
+    "Flask-SQLAlchemy",
+    "Flask-WTF",
+    "Flask-Session",
+    "flask-socketio",
+    "gunicorn",
+    "isort",
+    "itsdangerous",
+    "Jinja2",
+    "lazy-object-proxy",
+    "Mako",
+    "MarkupSafe",
+    "mccabe",
+    "pep8",
+    "psycopg2-binary",
+    "pycodestyle",
+    "pyflakes",
+    "pylint",
+    "python-dateutil",
+    "python-decouple",
+    "python-editor",
+    "six",
+    "SQLAlchemy",
+    "visitor",
+    "Werkzeug",
+    "wrapt",
+    "WTForms",
+]
+
+[project.urls]
+Homepage = "https://github.com/teacurran/dicey"
+Issues = "https://github.com/teacurran/dicey/issues"
+
+
+[project.optional-dependencies]
+dev = [
+    "pytest"
+]

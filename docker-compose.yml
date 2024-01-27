@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
+    ports:
+      - "5532:5432"
+
+  api:
+    build: ./api
+    command: python app.py
+    volumes:
+      - ./api:/usr/src/app
+    ports:
+      - "5500:5000"
+    depends_on:
+      - db
+
+  frontend:
+    build: ./frontend
+    command: npm run dev
+    volumes:
+      - ./frontend:/app
+    ports:
+      - "5600:5000"
+    depends_on:
+      - api
+
+  api-migrations:
+    build: ./api
+    command: alembic upgrade head
+    volumes:
+      - ./api:/usr/src/app
+    depends_on:
+      - db
