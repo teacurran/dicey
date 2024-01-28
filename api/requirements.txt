@@ -4,7 +4,6 @@
 #
 #    pip-compile --output-file=requirements.txt pyproject.toml
 #
---index-url https://tcurran:AKCp8nGaMc77aAoWnHmD6GXKTy6To7Un2HtT8Fjtcvgg5Kygcmd4bXt3vdq9sbyidZujicfRm@kbsforce.jfrog.io/artifactory/api/pypi/pypi/simple
 
 alembic==1.13.1
     # via
