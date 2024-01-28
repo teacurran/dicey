@@ -16,4 +16,4 @@ ENV FLASK_APP=application.py
 
 EXPOSE 8080
 
-ENTRYPOINT ["./boot.sh"]
+CMD ["./boot.sh"]

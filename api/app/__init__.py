@@ -11,7 +11,7 @@ from flask_socketio import SocketIO
 # Importing configs
 from sqlalchemy.ext.declarative import declarative_base
 
-from config import config_dict
+from config import EnvironmentConfig
 from app import models
 
 # Setup
@@ -28,17 +28,14 @@ bootstrap = Bootstrap()
 
 app = Flask(__name__)
 
-session = Session(app)
-app.session_interface = SqlAlchemySessionInterface(app, db, 'session', '')
 socketio = SocketIO(app, manage_session=True)
 
-
-def create_app(config_key='localpsql'):
+def create_app():
     # Enabling config initiation
-    app.config.from_object(config_dict[config_key])
-    config_dict[config_key].init_app(app)
+    app.config.from_object(EnvironmentConfig)
+    EnvironmentConfig.init_app(app)
 
-    app.config['SESSION_TYPE'] = 'SESSION_SQLALCHEMY'
+    app.config['SESSION_TYPE'] = 'sqlalchemy'
 
     bootstrap.init_app(app)
     socketio.init_app(app)
@@ -46,12 +43,7 @@ def create_app(config_key='localpsql'):
     with app.app_context():
         db.init_app(app)
 
-        # import the models here so the import doesn't create a circular dependency
-        from app.models.enums import GameMode
-        from app.models.enums import DeviceType
-        from app.models.devices import Device
-        from app.models.games import Game
-        from app.models.kiosks import Kiosk
+        from app.models.users import User
 
         # this code I was previously using but it imports them odd, leaving it because it's cool.
         # Model = declarative_base(name='Model')

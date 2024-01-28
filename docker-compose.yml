@@ -4,24 +4,37 @@ services:
   db:
     image: postgres:latest
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: postgres
+      POSTGRES_USER: dicey_user
+      POSTGRES_PASSWORD: dicey_pass
+      POSTGRES_DB: dicey
     ports:
       - "5532:5432"
 
   api:
-    build: ./api
-    command: python app.py
-    volumes:
-      - ./api:/usr/src/app
-    ports:
-      - "5500:5000"
     depends_on:
       - db
+    image: api
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    environment:
+      DATABASE_HOST: db
+      DATABASE_PORT: 5432
+      DATABASE_NAME: dicey
+      DATABASE_USER: dicey_user
+      DATABASE_PASS: dicey_pass
+      CLIENT_LOGGER: INFO
+      FILE_LOGGER: DEBUG
+    ports:
+      - "5500:5000"
+    volumes:
+      - ./api:/usr/src/application
 
-  frontend:
-    build: ./frontend
+  client:
+    image: client
+    build:
+      context: ./client
+      dockerfile: Dockerfile
     command: npm run dev
     volumes:
       - ./client:/app
