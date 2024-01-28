@@ -37,3 +37,6 @@ services:
       - ./api:/usr/src/app
     depends_on:
       - db
+
+volumes:
+  db_data:
