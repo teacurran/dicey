@@ -1,5 +1,8 @@
 FROM python:3.9
 
+ADD https://github.com/ufoscout/docker-compose-wait/releases/download/2.9.0/wait /wait
+RUN chmod +x /wait
+
 WORKDIR /usr/src/application
 
 COPY requirements.txt ./

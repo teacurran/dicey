@@ -25,6 +25,8 @@ services:
       DATABASE_PASS: dicey_pass
       CLIENT_LOGGER: INFO
       FILE_LOGGER: DEBUG
+      WAIT_HOSTS: db:5432
+      WAIT_TIMEOUT: 120
     ports:
       - "5500:5000"
     volumes:
